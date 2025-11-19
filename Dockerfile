@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ./WebApplication1/WebApplication1.csproj ./WebApplication1/
+COPY ./WebApplication1/WebApplication1/WebApplication1.csproj ./WebApplication1/
 WORKDIR /src/WebApplication1
 RUN dotnet restore
 
 
-COPY ./WebApplication1/ ./
+COPY ./WebApplication1/WebApplication1/ ./
 RUN dotnet publish -c Release -o /app/publish /p:PublishTrimmed=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
