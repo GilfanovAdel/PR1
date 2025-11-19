@@ -19,17 +19,11 @@ jobs:
              -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
              -d text="🔧 Начата сборка Docker-образа для репозитория ${{ github.repository }}"
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/timeapp:latest .
+      run: docker build -t timeapp:latest .
 
-    - name: Push image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/timeapp:latest
+    
 
     - name: Send Telegram finish message
       if: success()
